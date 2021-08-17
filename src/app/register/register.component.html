@@ -1,0 +1,49 @@
+<div class="uk-section">
+    <div class="uk-container uk-container-large">
+        <form class="uk-align-center" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <fieldset class="uk-fieldset">
+                <legend class="uk-legend align-center">Register</legend>
+                <div class="uk-margin">
+                    <input class="uk-input uk-margin-small-bottom uk-width-1-2 uk-align-center" type="text" formControlName="username"
+                        placeholder="Username">
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger"
+                        *ngIf="f.username.errors?.required && f.username.touched">Username is required
+                    </div>
+                </div>
+
+                <div class="uk-margin">
+                    <input class="uk-input uk-margin-small-bottom uk-width-1-2 uk-align-center" type="text" formControlName="email"
+                        placeholder="Email">
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger"
+                        *ngIf="f.email.errors?.required && f.email.touched">Email is required
+                    </div>
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger" *ngIf="f.email.errors?.email">Email is not
+                        valid
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input uk-margin-small-bottom uk-width-1-2 uk-align-center" type="password" formControlName="password"
+                        placeholder="Password">
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger" *ngIf="f.password.errors?.required && f.password.touched">
+                        Password is required
+                    </div>
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger" *ngIf="f.password.errors?.minlength">
+                        Password must have 6 characters at least
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <input class="uk-input uk-margin-small-bottom uk-width-1-2 uk-align-center" type="password"
+                        formControlName="confirmPassword" placeholder="Confirm Password">
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger" *ngIf="f.confirmPassword.errors?.required && f.confirmPassword.touched">
+                        Confirm password is required!
+                    </div>
+                    <div class="uk-margin-remove-top uk-text-small uk-width-1-2 uk-align-center uk-text-danger"
+                        *ngIf="f.confirmPassword.errors?.MustMatch">Passwords must match
+                    </div>
+                </div>
+            </fieldset><button class="uk-button uk-button-primary uk-align-center" type="submit"
+                [disabled]="!registerForm.valid">Register</button>
+            <span class="uk-align-center align-center">Already have an account? <a routerLink="/login">Login</a></span>
+        </form>
+    </div>
+</div>

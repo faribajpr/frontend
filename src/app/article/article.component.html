@@ -1,0 +1,64 @@
+<div id="banner" class="uk-height-small uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding"
+  [style.background-image]="
+    'url(http://localhost:1337' + (data?.image?.url )+ ')'
+  " uk-img>
+  <h1>{{ data?.title }}</h1>
+</div>
+
+<div class="uk-section">
+  <div class="uk-container uk-container-small">
+    <p>
+      <markdown [data]="data.content" ngPreserveWhitespaces>
+      </markdown>
+    </p>
+    <hr>
+    <a class="uk-link-reset" href="#modal-example" uk-toggle>
+      <span uk-icon="comment"></span>
+    </a>
+    <div id="modal-example" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body">
+        <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+          <fieldset class="uk-fieldset">
+            <legend class="uk-legend">Comment</legend>
+
+            <div class="uk-margin">
+              <input class="uk-input" type="text" formControlName="author" placeholder="Author">
+            </div>
+            <div class="uk-margin">
+              <textarea class="uk-textarea" rows="5" formControlName="content" placeholder="Your comment"></textarea>
+            </div>
+          </fieldset>
+          <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close uk-margin-right" type="button" (click)="onCommentCancel()">Cancel</button>
+            <button class="uk-button uk-button-primary" type="submit" [disabled]="!commentForm.valid">Save</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <ul class="uk-comment-list">
+      <li *ngFor="let comment of comments">
+        <article class="uk-comment uk-visible-toggle" tabindex="-1">
+          <header class="uk-comment-header uk-position-relative">
+            <div class="uk-grid-medium uk-flex-middle" uk-grid>
+              <div class="uk-width-auto">
+                <img class="uk-comment-avatar" src="http://localhost:1337/uploads/profile_efe6e2ec0e.png" width="80"
+                  height="80" alt="">
+              </div>
+              <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{comment.author}}</a>
+                </h4>
+                <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                  <li><a href="#">{{comment.publishedAt}}</a></li>
+                  <li><a style="cursor: not-allowed;">Reply</a></li>
+                </ul>
+              </div>
+            </div>
+          </header>
+          <div class="uk-comment-body">
+            <p>{{comment.content}}</p>
+          </div>
+        </article>
+      </li>
+    </ul>
+  </div>
+</div>
